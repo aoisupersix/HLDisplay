@@ -1,4 +1,6 @@
 *.iml
+google-services.json
+*.un~
 .gradle
 /local.properties
 /.idea/libraries
