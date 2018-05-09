@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>HLDisplayWebPage</title>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <style type="text/css">
+  .btn-fix {
+    padding: 0;
+    border: none;
+    white-space: normal;
+  }
+  </style>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="js/index.js"></script>
+
+  <h1 class="display-1" style="text-align: center;">Hayakawa Laboratory</h1>
+  <!-- ステータス表示部ここから-->
+  <div class="container-fluid">
+    <div id="memberStatus" class="row center-block"></div>
+  </div>
+  <!-- ステータス表示部ここまで-->
+  <!-- ステータス詳細モーダルここから-->
+  <div id="statusDetailModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">ステータス：<span id="statusDetail-Name" /></h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <h4 id="statusDetail-Status" class="display-3">Status</h4>
+          <hr />
+          <h5>ステータス更新：</h5>
+          <div id="statusButtons">
+            <button type="button" class="btn bg-primary" style="width: 7em;height: 5em;">Primary</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ステータス詳細モーダルここまで-->
+</body>
+</html>

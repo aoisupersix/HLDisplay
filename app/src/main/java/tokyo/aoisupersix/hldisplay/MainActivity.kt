@@ -38,7 +38,7 @@ class MainActivity : Activity() {
 
         //WebViewにディスプレイを表示
         val webView = findViewById<WebView>(R.id.mainWebView)
-        webView.loadUrl("https://aoisupersix.github.io/HLDisplayWebPage/")
+        webView.loadUrl("file:///android_asset/index.html")
         webView.settings.javaScriptEnabled = true
         webView.addJavascriptInterface(JsBridge(this), "android")
 
@@ -47,30 +47,6 @@ class MainActivity : Activity() {
         val filter = IntentFilter()
         filter.addAction("RELOAD")
         registerReceiver(updateReceiver, filter)
-
-        //データベース
-        val database = FirebaseDatabase.getInstance()
-        val ref = database.getReference("members")
-        ref.addChildEventListener(object: ChildEventListener {
-            override fun onChildAdded(p0: DataSnapshot?, p1: String?) {
-                Log.d(TAG, "FirebaseRealtimeDatabase: ChildAdded!")
-                //TODO メンバー追加時の処理
-            }
-
-            override fun onChildChanged(p0: DataSnapshot?, p1: String?) {
-                Log.d(TAG, "FirebaseRealtimeDatabase: ChildChanged!")
-                Log.d(TAG, p0.toString())
-            }
-
-            override fun onChildMoved(p0: DataSnapshot?, p1: String?) {
-            }
-
-            override fun onChildRemoved(p0: DataSnapshot?) {
-            }
-
-            override fun onCancelled(p0: DatabaseError?) {
-            }
-        })
     }
 
     override fun onResume() {
