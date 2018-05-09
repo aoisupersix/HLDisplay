@@ -53,10 +53,12 @@ class MainActivity : Activity() {
         val ref = database.getReference("members")
         ref.addChildEventListener(object: ChildEventListener {
             override fun onChildAdded(p0: DataSnapshot?, p1: String?) {
-                Log.d(TAG, p0.toString())
+                Log.d(TAG, "FirebaseRealtimeDatabase: ChildAdded!")
+                //TODO メンバー追加時の処理
             }
 
             override fun onChildChanged(p0: DataSnapshot?, p1: String?) {
+                Log.d(TAG, "FirebaseRealtimeDatabase: ChildChanged!")
                 Log.d(TAG, p0.toString())
             }
 
