@@ -40,7 +40,7 @@ class MainActivity : Activity() {
         val webView = findViewById<WebView>(R.id.mainWebView)
         webView.loadUrl("file:///android_asset/index.html")
         webView.settings.javaScriptEnabled = true
-        webView.addJavascriptInterface(JsBridge(this), "android")
+        webView.addJavascriptInterface(JsBridge(webView), "android")
 
         //通知設定
         val updateReceiver = UpdateReceiver()

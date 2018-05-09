@@ -13,6 +13,10 @@ var jqxhr = null;
  */
 $(function() { getStatus(); })
 
+function initCard(json){
+  console.log("initCard:" + json);
+}
+
 /**
  * カード押下時にステータス詳細モーダルを表示します
  * @param {object} obj - クリックされたカード
