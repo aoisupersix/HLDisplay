@@ -1,11 +1,9 @@
 package tokyo.aoisupersix.hldisplay
 /**
- * DBのメンバーモデル
+ * DBのモデル
  */
-data class MembersModel(val members: MutableList<MemberModel>)
+data class DbModel(val members: MutableList<MemberModel>, val states: MutableList<StatusModel>)
 
 data class MemberModel(val name: String, val status: Int)
-
-data class StatesModel(val states: MutableList<StatusModel>)
 
 data class StatusModel(val name: String, val color: String)

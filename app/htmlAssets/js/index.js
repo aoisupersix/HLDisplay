@@ -13,8 +13,14 @@ var jqxhr = null;
  */
 $(function() { getStatus(); })
 
-function initCard(json){
-  console.log("initCard:" + json);
+function initMember(jsonString){
+  var json = JSON.parse(jsonString);
+  console.log("initMember-jsonString:" + jsonString);
+  console.log("initMember-json[0]:" + json["members"][0]["name"]);
+}
+
+function initStatus(jsonString){
+
 }
 
 /**
@@ -76,7 +82,6 @@ function pushStatus(userId, statusId) {
  * @param {JSON} json - サーバからのレスポンスデータ
  */
 function updateLayout(json){
-  console.log(json);
   //ステータスの削除
   $("#memberStatus").empty();
 
