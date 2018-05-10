@@ -12,7 +12,14 @@ import com.squareup.moshi.Moshi
  */
 class JsBridge(webView: WebView) {
 
+    /**
+     * Log表示用の識別子
+     */
     val TAG = this.javaClass.simpleName
+
+    /**
+     * HTMLを表示するWebView
+     */
     val webView = webView
 
     init {
@@ -20,7 +27,7 @@ class JsBridge(webView: WebView) {
         val database = FirebaseDatabase.getInstance()
         val ref = database.reference
 
-        //初期化処理
+        //region 初期化処理
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(p0: DataSnapshot?) {
                 val dbModel = DbModel(mutableListOf(), mutableListOf())
@@ -47,6 +54,7 @@ class JsBridge(webView: WebView) {
             }
             override fun onCancelled(p0: DatabaseError?) {}
         })
+        //endregion
 
         //メンバー情報更新のイベント
         val memRef = database.getReference("members")
