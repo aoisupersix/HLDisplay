@@ -9,18 +9,24 @@ var UPDATE_TIME = 2000
 var jqxhr = null;
 
 /**
- * 初期化処理を行います
+ * 初期化処理を行います。
+ * AndroidApp側から呼び出される関数です。
+ * @param {string} jsonString 
  */
-$(function() { getStatus(); })
+function init(jsonString){
+  //ステータスの削除
+  $("#memberStatus").empty();
 
-function initMember(jsonString){
+  //ステータスの生成
   var json = JSON.parse(jsonString);
-  console.log("initMember-jsonString:" + jsonString);
-  console.log("initMember-json[0]:" + json["members"][0]["name"]);
-}
-
-function initStatus(jsonString){
-
+  var members = json["members"];
+  var status = json["states"];
+  for(var i = 0; i < members.length; i++){
+    var stateId = parseInt(members[i]["status"]);
+    console.log("status[stateId][name]=" + status);
+    addCard(i, members[i]["name"], status[stateId]["name"], status[stateId]["color"]);
+  }
+  initStatusDetailButton(status);
 }
 
 /**
@@ -47,36 +53,6 @@ function statusChange(obj) {
 }
 
 /**
- * ステータス等の情報を取得を要求します
- */
-function getStatus() {
-  $.ajax({
-    url:'https://script.google.com/macros/s/AKfycbwtEGgAOQ6LA3rcvsLcQFrrg8uVE1v5lkg8eNn40YjwAASTwmc/exec?returns=jsonp',
-    dataType: 'jsonp',
-    jsonpCallback: 'updateLayout',
-  });
-}
-
-/**
- * ステータス情報を更新します
- * @param {int} userId - ユーザ情報のID
- * @param {int} statusId - ステータス情報のID
- */
-function pushStatus(userId, statusId) {
-  var dataDict = {"id": userId, "status": statusId};
-  if(jqxhr) {
-    //通信を中断
-    jqxhr.abort();
-  }
-  jqxhr = $.ajax({
-    url: 'https://script.google.com/macros/s/AKfycbwtEGgAOQ6LA3rcvsLcQFrrg8uVE1v5lkg8eNn40YjwAASTwmc/exec?returns=jsonp&update=true',
-    dataType: 'jsonp',
-    data: dataDict,
-    jsonpCallback: 'updateLayout'
-  });
-}
-
-/**
  * ステータス情報を適用させます
  * Jsonpのコールバック関数です
  * @param {JSON} json - サーバからのレスポンスデータ
@@ -93,12 +69,11 @@ function updateLayout(json){
     addCard(member[i].id, member[i].name, status[stateId].name, status[stateId].color);
   }
   initStatusDetailButton(status);
-  //setTimeout(function(){getStatus()}, UPDATE_TIME);
 }
 
 /**
  * Htmlにカードを追加します
- * @param {int} id - ユーザidea
+ * @param {int} id - ユーザid
  * @param {string} name - ユーザ名
  * @param {string} statusText - ステータス状態を表す文字列
  * @param {string} color - ステータス状態に対応するBootStrapカラー

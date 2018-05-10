@@ -50,7 +50,7 @@ class JsBridge(webView: WebView) {
                 val adapter = moshi.adapter(DbModel::class.java)
                 val decodeJson = adapter.toJson(dbModel)
                 //Jsに送信
-                webView.loadUrl("javascript:initMember('$decodeJson')")
+                webView.loadUrl("javascript:init('$decodeJson')")
             }
             override fun onCancelled(p0: DatabaseError?) {}
         })

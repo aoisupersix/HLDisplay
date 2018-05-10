@@ -54,9 +54,6 @@ class MainActivity : Activity() {
 
         val view = window.decorView
         view.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE
-
-        val webView = findViewById<WebView>(R.id.mainWebView)
-        webView.loadUrl("javascript:getStatus();")
     }
 
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
@@ -77,8 +74,6 @@ class MainActivity : Activity() {
     inner class UpdateReceiver: BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             Log.d(TAG, "RELOAD From broadCast")
-            val webView = findViewById<WebView>(R.id.mainWebView)
-            webView.loadUrl("javascript:getStatus();")
         }
     }
 }
