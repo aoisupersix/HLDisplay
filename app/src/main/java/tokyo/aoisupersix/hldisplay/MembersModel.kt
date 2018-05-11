@@ -8,7 +8,7 @@ data class DbModel(val members: MutableList<MemberModel>, val states: MutableLis
 /**
  * メンバー情報のモデルクラス
  */
-data class MemberModel(val name: String, val status: Int)
+data class MemberModel(val id: Int, val name: String, val status: Int)
 
 /**
  * ステータス情報のモデルクラス
