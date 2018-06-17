@@ -39,7 +39,8 @@ class JsBridge(webView: WebView) {
                 //メンバー更新処理
                 val memModel = MemberModel(
                         p0!!.key.toInt(),
-                        p0.child("name").value.toString(),
+                        p0.child("last_name").value.toString(),
+                        p0.child("first_name").value.toString(),
                         (p0.child("status").value as Long).toInt()
                 )
                 //JSONに変換
@@ -69,7 +70,8 @@ class JsBridge(webView: WebView) {
                 for(m in p0!!.child("members").children) {
                     dbModel.members.add(MemberModel(
                             m.key.toInt(),
-                            m.child("name").value.toString(),
+                            m.child("last_name").value.toString(),
+                            m.child("first_name").value.toString(),
                             (m.child("status").value as Long).toInt()
                     ))
                 }
@@ -99,5 +101,10 @@ class JsBridge(webView: WebView) {
     @JavascriptInterface
     fun updateState(userId: Int, userStateId: Int) {
         Log.d(TAG, "updateState:userId:$userId,userStateId:$userStateId")
+        val database = FirebaseDatabase.getInstance()
+        val memRef = database.getReference("members")
+        val updateMemberData = hashMapOf<String, Any>("status" to userStateId)
+        memRef.child(userId.toString()).updateChildren(updateMemberData)
+        Log.d(TAG, memRef.child(userId.toString()).key)
     }
 }

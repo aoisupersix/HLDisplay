@@ -29,7 +29,7 @@ function init(jsonString) {
   statusJson = status;
   for(var i = 0; i < members.length; i++){
     var stateId = parseInt(members[i]["status"]);
-    addCard(i, members[i]["name"], status[stateId]["name"], status[stateId]["color"]);
+    addCard(i, members[i]["last_name"], status[stateId]["name"], status[stateId]["color"]);
   }
   initStatusDetailButton(status);
 }
@@ -59,7 +59,7 @@ function updateMemberStatus(jsonString) {
       $(element).find('.card-title').text(statusJson[stateId]["name"])
       return false;
     }
-  })
+  });
 }
 
 /**
@@ -80,9 +80,8 @@ function showStatusDetail(obj) {
 function statusChange(obj) {
   var userId = $('#statusDetailModal').attr('data-id');
   var stateId = $(obj).attr('data-id');
-  pushStatus(userId, stateId);
   $('#statusDetailModal').modal('hide');
-  android.updateState(userId, stateId);
+  android.updateState(parseInt(userId), parseInt(stateId));
 }
 
 /**
@@ -99,7 +98,7 @@ function updateLayout(json){
   var status = json["status"];
   for(var i = 0; i < member.length; i++){
     var stateId = parseInt(member[i].status);
-    addCard(member[i].id, member[i].name, status[stateId].name, status[stateId].color);
+    addCard(member[i].id, member[i].last_name, status[stateId].name, status[stateId].color);
   }
   initStatusDetailButton(status);
 }
