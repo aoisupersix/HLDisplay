@@ -29,7 +29,7 @@ function init(jsonString) {
   statusJson = status;
   for(var i = 0; i < members.length; i++){
     var stateId = parseInt(members[i]["status"]);
-    addCard(i, members[i]["last_name"], status[stateId]["name"], status[stateId]["color"]);
+    addCard(i, members[i]["last_name"], members[i]["first_name"], status[stateId]["name"], status[stateId]["color"]);
   }
   initStatusDetailButton(status);
 }
@@ -67,7 +67,7 @@ function updateMemberStatus(jsonString) {
  * @param {object} obj - クリックされたカード
  */
 function showStatusDetail(obj) {
-  $('#statusDetail-Name').text($(obj).attr('data-name'));
+  $('#statusDetail-Name').text($(obj).attr('data-last_name') + "　" + $(obj).attr('data-first_name'));
   $('#statusDetail-Status').text($(obj).attr('data-statusText'));
   $('#statusDetailModal').attr('data-id', $(obj).attr('data-id'));
   $('#statusDetailModal').modal();
@@ -98,7 +98,7 @@ function updateLayout(json){
   var status = json["status"];
   for(var i = 0; i < member.length; i++){
     var stateId = parseInt(member[i].status);
-    addCard(member[i].id, member[i].last_name, status[stateId].name, status[stateId].color);
+    addCard(member[i].id, member[i].last_name, member[i].first_name, status[stateId].name, status[stateId].color);
   }
   initStatusDetailButton(status);
 }
@@ -106,22 +106,24 @@ function updateLayout(json){
 /**
  * Htmlにカードを追加します
  * @param {int} id - ユーザid
- * @param {string} name - ユーザ名
+ * @param {string} last_name - ユーザの名字
+ * @param {string} first_name - ユーザの名前
  * @param {string} statusText - ステータス状態を表す文字列
  * @param {string} color - ステータス状態に対応するBootStrapカラー
  */
-function addCard(id, name, statusText, color){
+function addCard(id, last_name, first_name, statusText, color){
   $('#memberStatus').append(
     $('<div class="card" style="margin: 5pt;width: 11rem;height: 9rem;"></div>').addClass('bg-' + color)
     .append($('<a href="#" class="btn btn-fix"></a>')
       .attr({
         'onClick': 'showStatusDetail(this)',
         'data-id': id,
-        'data-name': name,
+        'data-last_name': last_name,
+        'data-first_name': first_name,
         'data-statusText': statusText,
         'data-color': color
       })
-      .append($('<h4 class="card-header"></h4>').text(name))
+      .append($('<h4 class="card-header"></h4>').text(last_name))
       .append($('<div class="card-body"></div>')
         .append($('<h1 class="card-title" style="font-weight: bold;"></h1>').text(statusText))
       )
