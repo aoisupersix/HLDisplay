@@ -103,7 +103,7 @@ class JsBridge(webView: WebView) {
         Log.d(TAG, "updateState:userId:$userId,userStateId:$userStateId")
         val database = FirebaseDatabase.getInstance()
         val memRef = database.getReference("members")
-        val updateMemberData = hashMapOf<String, Any>("status" to userStateId)
+        val updateMemberData = hashMapOf("status" to userStateId, "last_update_is_auto" to false)
         memRef.child(userId.toString()).updateChildren(updateMemberData)
         Log.d(TAG, memRef.child(userId.toString()).key)
     }
