@@ -23,8 +23,8 @@ class JsBridge(webView: WebView) {
     val webView = webView
 
     init {
-        initState()
         val database = FirebaseDatabase.getInstance()
+        initState()
 
         //メンバー情報更新のイベント
         val memRef = database.getReference("members")
